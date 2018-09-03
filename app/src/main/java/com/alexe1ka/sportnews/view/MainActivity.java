@@ -1,4 +1,4 @@
-package com.alexe1ka.sportnews;
+package com.alexe1ka.sportnews.view;
 
 import android.support.v4.app.Fragment;
 
