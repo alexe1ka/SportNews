@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <!--android:icon="@drawable/ic_menu_slideshow"-->
+        <item
+            android:id="@+id/nav_football"
+            android:icon="@drawable/ic_adjust_303f9f_24dp"
+            android:title="@string/football_title"/>
+        <item
+            android:id="@+id/nav_hockey"
+            android:icon="@drawable/ic_adjust_303f9f_24dp"
+            android:title="@string/hockey_title"/>
+        <item
+            android:id="@+id/nav_tennis"
+            android:icon="@drawable/ic_adjust_303f9f_24dp"
+            android:title="@string/tennis_title"/>
+        <item
+            android:id="@+id/nav_basketball"
+            android:icon="@drawable/ic_adjust_303f9f_24dp"
+            android:title="@string/basketball_title"/>
+
+        <item
+            android:id="@+id/nav_volleyball"
+            android:icon="@drawable/ic_adjust_303f9f_24dp"
+            android:title="@string/volleyball_title"/>
+
+        <item
+            android:id="@+id/nav_cybersport"
+            android:icon="@drawable/ic_adjust_303f9f_24dp"
+            android:title="@string/cybersport_title"/>
+    </group>
+</menu>
