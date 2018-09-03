@@ -1,4 +1,4 @@
-package com.alexe1ka.sportnews.view;
+package com.alexe1ka.sportnews.view.activities;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;

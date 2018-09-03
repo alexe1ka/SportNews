@@ -1,4 +1,4 @@
-package com.alexe1ka.sportnews.view;
+package com.alexe1ka.sportnews.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,12 +25,6 @@ public class NewsListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news_list,container,false);
-
-//        Spinner spinner = view.findViewById(R.id.kind_of_sport_spinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.kind_of_sport, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-
         return view;
     }
 }
