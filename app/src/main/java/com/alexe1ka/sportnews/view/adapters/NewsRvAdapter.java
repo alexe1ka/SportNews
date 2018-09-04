@@ -16,8 +16,7 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
     private Events mEvents;
     private Context mContext;
 
-    public NewsRvAdapter(Events events, Context context) {
-        mEvents = events;
+    public NewsRvAdapter( Context context) {
         mContext = context;
     }
 
@@ -54,7 +53,8 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
         return mEvents.getEvents().size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    //todo заимплементить сюда онклик когда будет все готово с первым экраном
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTitleTv;
         TextView mCoefficientTv;
         TextView mTimeTv;
@@ -62,7 +62,7 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
         TextView mPreviewTv;
 
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             mTitleTv = itemView.findViewById(R.id.title_tv);
             mCoefficientTv = itemView.findViewById(R.id.coefficient_tv);

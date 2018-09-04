@@ -24,6 +24,18 @@ public class Event {
     @Expose
     private String article;
 
+    public Event() {
+    }
+
+    public Event(String title, String coefficient, String time, String place, String preview, String article) {
+        this.title = title;
+        this.coefficient = coefficient;
+        this.time = time;
+        this.place = place;
+        this.preview = preview;
+        this.article = article;
+    }
+
     public String getTitle() {
         return title;
     }
