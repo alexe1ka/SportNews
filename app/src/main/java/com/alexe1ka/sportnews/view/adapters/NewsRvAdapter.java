@@ -16,7 +16,7 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
     private Events mEvents;
     private Context mContext;
 
-    public NewsRvAdapter( Context context) {
+    public NewsRvAdapter(Context context) {
         mContext = context;
     }
 
@@ -50,7 +50,7 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return mEvents.getEvents().size();
+        return mEvents != null ? mEvents.getEvents().size() : 0;
     }
 
     //todo заимплементить сюда онклик когда будет все готово с первым экраном

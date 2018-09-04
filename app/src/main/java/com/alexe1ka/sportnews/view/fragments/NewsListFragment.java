@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.alexe1ka.sportnews.R;
 import com.alexe1ka.sportnews.view.adapters.NewsRvAdapter;
@@ -45,8 +44,9 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
 
 
         mNewsListViewModel = ViewModelProviders.of(this).get(NewsListViewModel.class);
-        mNewsListViewModel.init("hockey");
+        mNewsListViewModel.init("football");
         mNewsListViewModel.getEventsLiveData().observe(this, events -> mNewsRvAdapter.setEvents(events));
+
 
         mNewsRv = getActivity().findViewById(R.id.news_list_rv);
         mLayoutManager = new LinearLayoutManager(this.getContext());
@@ -68,21 +68,36 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_football) {
-            Toast.makeText(this.getContext(), "Football",Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_hockey) {
-            Toast.makeText(this.getContext(), "Hockey",Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_tennis) {
-            Toast.makeText(this.getContext(), "tennis",Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_basketball) {
-            Toast.makeText(this.getContext(), "basketball",Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_volleyball) {
-            Toast.makeText(this.getContext(), "volleyball",Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_cybersport) {
-            Toast.makeText(this.getContext(), "cybersport",Toast.LENGTH_LONG).show();
+        switch (item.getItemId()) {
+            case R.id.nav_football:
+                mNewsListViewModel.loadOtherEvents("football");
+                //            Toast.makeText(this.getContext(), "Football", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_hockey:
+                mNewsListViewModel.loadOtherEvents("hockey");
+                //            Toast.makeText(this.getContext(), "Hockey", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_tennis:
+                mNewsListViewModel.loadOtherEvents("tennis");
+//                Toast.makeText(this.getContext(), "tennis", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_basketball:
+                mNewsListViewModel.loadOtherEvents("basketball");
+//                Toast.makeText(this.getContext(), "basketball", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_volleyball:
+                mNewsListViewModel.loadOtherEvents("volleyball");
+//                Toast.makeText(this.getContext(), "volleyball", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_cybersport:
+                mNewsListViewModel.loadOtherEvents("cybersport");
+//                Toast.makeText(this.getContext(), "cybersport", Toast.LENGTH_LONG).show();
+                break;
+            default:
+                throw new UnsupportedOperationException();
         }
 
-        DrawerLayout drawer =this.getActivity().findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = this.getActivity().findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
