@@ -25,7 +25,7 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
     }
 
     public void setEvents(Events events) {
-        mEvents = events;
+        this.mEvents = events;
         notifyDataSetChanged();
     }
 

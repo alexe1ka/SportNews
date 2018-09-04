@@ -27,6 +27,9 @@ public class NewsListViewModel extends AndroidViewModel {
         if (mEventsLiveData != null) {
             return;
         }
-        mEventsLiveData = mNewsRepository.getFakeEvents();
+//        mEventsLiveData = mNewsRepository.getFakeEvents(kindOfSport);
+        mEventsLiveData = mNewsRepository.getEvents(kindOfSport);
     }
+
+
 }

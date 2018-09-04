@@ -19,7 +19,7 @@ public class SportNewsApp extends Application {
         Gson gson = new GsonBuilder().setLenient().create();
 
         mRetrofit = new Retrofit.Builder().
-                baseUrl("https://api.github.com").
+                baseUrl("http://mikonatoruri.win/").
                 addConverterFactory(GsonConverterFactory.create(gson)).//конвертер json
                 build();
         sSportNewsApi = mRetrofit.create(SportNewsApi.class);
