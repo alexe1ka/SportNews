@@ -11,6 +11,11 @@
     app:cardCornerRadius="4dp"
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="193dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    app:cardElevation="10dp"
     >
 
     <android.support.constraint.ConstraintLayout
