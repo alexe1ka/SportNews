@@ -8,9 +8,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface SportNewsApi {
-    @GET("/list.php?category={category}")
+    @GET("list.php?")
     Call<Events> getEvents(@Query("category") String category);
 
-    @GET("/post.php?article={article}")
+    @GET("post.php?")
     Call<Articles> getArticles(@Query("article") String article);
 }

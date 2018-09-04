@@ -45,7 +45,7 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
 
 
         mNewsListViewModel = ViewModelProviders.of(this).get(NewsListViewModel.class);
-        mNewsListViewModel.init("");
+        mNewsListViewModel.init("hockey");
         mNewsListViewModel.getEventsLiveData().observe(this, events -> mNewsRvAdapter.setEvents(events));
 
         mNewsRv = getActivity().findViewById(R.id.news_list_rv);

@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.alexe1ka.sportnews.SportNewsApp;
 import com.alexe1ka.sportnews.model.events.Events;
 import com.alexe1ka.sportnews.repository.NewsRepository;
 
@@ -12,7 +13,7 @@ public class NewsListViewModel extends AndroidViewModel {
     public static final String TAG = NewsListViewModel.class.getSimpleName();
 
     private MutableLiveData<Events> mEventsLiveData;
-    private NewsRepository mNewsRepository = new NewsRepository();
+    private NewsRepository mNewsRepository  = SportNewsApp.getNewsRepository();
 
     public NewsListViewModel(@NonNull Application application) {
         super(application);
@@ -27,6 +28,6 @@ public class NewsListViewModel extends AndroidViewModel {
         if (mEventsLiveData != null) {
             return;
         }
-        mEventsLiveData = mNewsRepository.getFakeEvents();
+        mEventsLiveData = mNewsRepository.getFakeEvents(kindOfSport);
     }
 }
