@@ -1,7 +1,6 @@
 package com.alexe1ka.sportnews.repository;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.alexe1ka.sportnews.SportNewsApp;
 import com.alexe1ka.sportnews.model.articles.ArticleDescription;
@@ -27,24 +26,8 @@ public class NewsRepository {
         SportNewsApp.getSportNewsApi().getEvents(kindOfEvents).enqueue(new Callback<Events>() {
             @Override
             public void onResponse(Call<Events> call, Response<Events> response) {
-                Log.d(TAG, "onResponse: " + response.headers());
-                Log.d(TAG, "onResponse: " + response.body());
-
-
                 if (response.isSuccessful()) {
                     eventsMutableLiveData.postValue(response.body());
-
-                } else {
-                    switch (response.code()) {
-
-                        //TODO реализовать
-                        case 404:
-
-                            break;
-                        case 500:
-
-                            break;
-                    }
                 }
             }
 

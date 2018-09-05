@@ -20,10 +20,11 @@ import android.widget.ProgressBar;
 import com.alexe1ka.sportnews.R;
 import com.alexe1ka.sportnews.SportNewsApp;
 import com.alexe1ka.sportnews.network.InternetConnectionListener;
+import com.alexe1ka.sportnews.network.InternetErrorListener;
 import com.alexe1ka.sportnews.view.adapters.NewsRvAdapter;
 import com.alexe1ka.sportnews.viewmodel.NewsListViewModel;
 
-public class NewsListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener,InternetConnectionListener {
+public class NewsListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, InternetConnectionListener,InternetErrorListener {
     private static final String TAG = NewsListFragment.class.getSimpleName();
 
     private NewsListViewModel mNewsListViewModel;
@@ -37,7 +38,6 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
     private ProgressBar mProgressBar;
 
 
-
     public static NewsListFragment newInstance() {
         return new NewsListFragment();
     }
@@ -48,16 +48,15 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         mNavigationView = getActivity().findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
 
-        ((SportNewsApp)getActivity().getApplication()).setInternetConnectionListener(this);
+        ((SportNewsApp) getActivity().getApplication()).setInternetConnectionListener(this);
+        ((SportNewsApp) getActivity().getApplication()).setInternetErrorListener(this);
 
         mProgressBar = getActivity().findViewById(R.id.loading_pb);
         mProgressBar.setVisibility(View.GONE);
 
         mNewsListViewModel = ViewModelProviders.of(this).get(NewsListViewModel.class);
         mNewsListViewModel.init("football");
-        mNewsListViewModel.getEventsLiveData().observe(this, events -> {
-            mNewsRvAdapter.setEvents(events);
-        });
+        mNewsListViewModel.getEventsLiveData().observe(this, events -> mNewsRvAdapter.setEvents(events));
 
 
         mNewsRv = getActivity().findViewById(R.id.news_list_rv);
@@ -89,30 +88,24 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_football:
-                mNewsListViewModel.loadOtherEvents("football").observe(this, events -> {
-                    mNewsRvAdapter.setEvents(events);
-                });
+                //TODO захардкоженные стринги
+                getNewsForThisSport("football");
                 break;
             case R.id.nav_hockey:
-                mNewsListViewModel.loadOtherEvents("hockey").observe(this, events -> {
-                    mNewsRvAdapter.setEvents(events);
-                });
+                getNewsForThisSport("ho");
+//                getNewsForThisSport("hockey");
                 break;
             case R.id.nav_tennis:
-                mNewsListViewModel.loadOtherEvents("tennis").observe(this, events -> {
-                    mNewsRvAdapter.setEvents(events);
-                });
+                getNewsForThisSport("tennis");
                 break;
             case R.id.nav_basketball:
-                mNewsListViewModel.loadOtherEvents("basketball").observe(this, events -> {
-                    mNewsRvAdapter.setEvents(events);
-                });
+                getNewsForThisSport("basketball");
                 break;
             case R.id.nav_volleyball:
-                mNewsListViewModel.loadOtherEvents("volleyball").observe(this, events -> mNewsRvAdapter.setEvents(events));
+                getNewsForThisSport("volleyball");
                 break;
             case R.id.nav_cybersport:
-                mNewsListViewModel.loadOtherEvents("cybersport").observe(this, events -> mNewsRvAdapter.setEvents(events));
+                getNewsForThisSport("cybersport");
                 break;
             default:
                 throw new UnsupportedOperationException();
@@ -123,9 +116,23 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         return true;
     }
 
+    private void getNewsForThisSport(String sport) {
+        mNewsListViewModel.loadOtherEvents(sport).observe(this, events -> mNewsRvAdapter.setEvents(events));
+    }
+
     @Override
     public void onInternetUnavailable() {
-        Snackbar snackbar = Snackbar.make(getView(), "Internet unavailable", Snackbar.LENGTH_LONG);
+        //можно добавить в снакбар переход в настройки для включения интернета
+        errorSnackbar("Internet unavailable");
+    }
+
+    public void errorSnackbar(String text) {
+        Snackbar snackbar = Snackbar.make(getView(), text, Snackbar.LENGTH_LONG);
         snackbar.show();
+    }
+
+    @Override
+    public void onServerError(String error) {
+        errorSnackbar(error);
     }
 }
