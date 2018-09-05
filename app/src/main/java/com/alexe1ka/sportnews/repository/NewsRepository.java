@@ -32,7 +32,7 @@ public class NewsRepository {
 
 
                 if (response.isSuccessful()) {
-                    eventsMutableLiveData.setValue(response.body());
+                    eventsMutableLiveData.postValue(response.body());
                 } else {
                     switch (response.code()) {
 

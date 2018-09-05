@@ -45,7 +45,10 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
 
         mNewsListViewModel = ViewModelProviders.of(this).get(NewsListViewModel.class);
         mNewsListViewModel.init("football");
-        mNewsListViewModel.getEventsLiveData().observe(this, events -> mNewsRvAdapter.setEvents(events));
+//        mNewsListViewModel.getEventsLiveData().observe(this, events -> {
+//            Log.d(TAG, "onActivityCreated: OBSERVE_VIEW_MODEL"+events.getEvents().toString());
+//            mNewsRvAdapter.setEvents(events);
+//        });
 
 
         mNewsRv = getActivity().findViewById(R.id.news_list_rv);
@@ -66,32 +69,27 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
         switch (item.getItemId()) {
             case R.id.nav_football:
-                mNewsListViewModel.loadOtherEvents("football");
-                //            Toast.makeText(this.getContext(), "Football", Toast.LENGTH_LONG).show();
+                mNewsListViewModel.loadOtherEvents("football").observe(this, events -> {
+                    mNewsRvAdapter.setEvents(events);
+                });
                 break;
             case R.id.nav_hockey:
-                mNewsListViewModel.loadOtherEvents("hockey");
-                //            Toast.makeText(this.getContext(), "Hockey", Toast.LENGTH_LONG).show();
+                mNewsListViewModel.loadOtherEvents("hockey").observe(this, events -> mNewsRvAdapter.setEvents(events));
                 break;
             case R.id.nav_tennis:
-                mNewsListViewModel.loadOtherEvents("tennis");
-//                Toast.makeText(this.getContext(), "tennis", Toast.LENGTH_LONG).show();
+                mNewsListViewModel.loadOtherEvents("tennis").observe(this, events -> mNewsRvAdapter.setEvents(events));
+
                 break;
             case R.id.nav_basketball:
-                mNewsListViewModel.loadOtherEvents("basketball");
-//                Toast.makeText(this.getContext(), "basketball", Toast.LENGTH_LONG).show();
+                mNewsListViewModel.loadOtherEvents("basketball").observe(this, events -> mNewsRvAdapter.setEvents(events));
                 break;
             case R.id.nav_volleyball:
-                mNewsListViewModel.loadOtherEvents("volleyball");
-//                Toast.makeText(this.getContext(), "volleyball", Toast.LENGTH_LONG).show();
+                mNewsListViewModel.loadOtherEvents("volleyball").observe(this, events -> mNewsRvAdapter.setEvents(events));
                 break;
             case R.id.nav_cybersport:
-                mNewsListViewModel.loadOtherEvents("cybersport");
-//                Toast.makeText(this.getContext(), "cybersport", Toast.LENGTH_LONG).show();
+                mNewsListViewModel.loadOtherEvents("cybersport").observe(this, events -> mNewsRvAdapter.setEvents(events));
                 break;
             default:
                 throw new UnsupportedOperationException();
