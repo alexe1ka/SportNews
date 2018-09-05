@@ -11,16 +11,22 @@ import com.alexe1ka.sportnews.model.events.Events;
 import com.alexe1ka.sportnews.repository.NewsRepository;
 
 public class NewsListViewModel extends AndroidViewModel {
-    public static final String TAG = NewsListViewModel.class.getSimpleName();
+    private static final String TAG = NewsListViewModel.class.getSimpleName();
 
 
     private MutableLiveData<Events> mEventsLiveData;
+    private MutableLiveData<Boolean> showProgress = new MutableLiveData<>();
     private NewsRepository mNewsRepository;
 
 
     public NewsListViewModel(@NonNull Application application) {
         super(application);
         mNewsRepository = SportNewsApp.getNewsRepository();
+    }
+
+    public MutableLiveData<Boolean> getShowProgress() {
+        Log.d(TAG, "getShowProgress: ");
+        return showProgress;
     }
 
     public MutableLiveData<Events> getEventsLiveData() {
@@ -30,13 +36,10 @@ public class NewsListViewModel extends AndroidViewModel {
 
     public MutableLiveData<Events> loadOtherEvents(String sportName) {
         Log.d(TAG, "loadOtherEvents: " + sportName);
-        return mEventsLiveData = mNewsRepository.getEvents(sportName);
-    }
+        mEventsLiveData = mNewsRepository.getEvents(sportName);
 
-//    public MutableLiveData<Events> loadOtherEvents(String sportName) {
-//
-//        return mEventsLiveData.postValue(mNewsRepository.getEvents(sportName).getValue());
-//    }
+        return mEventsLiveData;
+    }
 
 
     public void init(String kindOfSport) {

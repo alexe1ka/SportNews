@@ -19,7 +19,6 @@ public class NewsRepository {
     private static NewsRepository INSTANCE = null;
 
     private NewsRepository() {
-
     }
 
     public MutableLiveData<Events> getEvents(String kindOfEvents) {
@@ -33,6 +32,7 @@ public class NewsRepository {
 
                 if (response.isSuccessful()) {
                     eventsMutableLiveData.postValue(response.body());
+
                 } else {
                     switch (response.code()) {
 
