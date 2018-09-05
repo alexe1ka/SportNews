@@ -36,6 +36,8 @@ public class EventDescriptionFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //в ответе с апи на самом деле не названия команда,а слова СТАТИСТИКА и ГИД
         mTeam1Tv = getActivity().findViewById(R.id.art_team1_tv);
         mTeam2Tv = getActivity().findViewById(R.id.art_team2_tv);
 

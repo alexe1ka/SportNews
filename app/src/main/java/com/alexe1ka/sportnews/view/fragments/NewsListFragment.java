@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,10 +18,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.alexe1ka.sportnews.R;
+import com.alexe1ka.sportnews.SportNewsApp;
+import com.alexe1ka.sportnews.network.InternetConnectionListener;
 import com.alexe1ka.sportnews.view.adapters.NewsRvAdapter;
 import com.alexe1ka.sportnews.viewmodel.NewsListViewModel;
 
-public class NewsListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+public class NewsListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener,InternetConnectionListener {
+    private static final String TAG = NewsListFragment.class.getSimpleName();
 
     private NewsListViewModel mNewsListViewModel;
 
@@ -33,7 +37,6 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
     private ProgressBar mProgressBar;
 
 
-    public static final String TAG = NewsListFragment.class.getSimpleName();
 
     public static NewsListFragment newInstance() {
         return new NewsListFragment();
@@ -45,6 +48,8 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         mNavigationView = getActivity().findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
 
+        ((SportNewsApp)getActivity().getApplication()).setInternetConnectionListener(this);
+
         mProgressBar = getActivity().findViewById(R.id.loading_pb);
         mProgressBar.setVisibility(View.GONE);
 
@@ -53,19 +58,6 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         mNewsListViewModel.getEventsLiveData().observe(this, events -> {
             mNewsRvAdapter.setEvents(events);
         });
-
-//        mNewsListViewModel.getShowProgress().observe(this, new Observer<Boolean>() {
-//            @Override
-//            public void onChanged(@Nullable Boolean aBoolean) {
-//                Log.d(TAG, "onChanged: aBoolean: "+aBoolean);
-//                if (!aBoolean) {
-//                    showProgress();
-//                } else {
-//                    hideProgress();
-//                }
-//            }
-//        });
-
 
 
         mNewsRv = getActivity().findViewById(R.id.news_list_rv);
@@ -80,7 +72,8 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         mNewsRv.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
     }
-    private void hideProgress(){
+
+    private void hideProgress() {
         mProgressBar.setVisibility(View.GONE);
         mNewsRv.setVisibility(View.VISIBLE);
     }
@@ -130,7 +123,9 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         return true;
     }
 
-    private void getNewCategoryOfNews() {
-
+    @Override
+    public void onInternetUnavailable() {
+        Snackbar snackbar = Snackbar.make(getView(), "Internet unavailable", Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 }
