@@ -64,7 +64,7 @@ public class SportNewsApp extends Application {
                 .addInterceptor(new HandlingErrorInterceptor() {
                     @Override
                     public void onServerError(String error) {
-                        mInternetErrorListener.onServerError(error);
+                        mInternetErrorListener.onError(error);
                     }
                 })
                 .readTimeout(30, TimeUnit.SECONDS)

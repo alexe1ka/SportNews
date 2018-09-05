@@ -132,7 +132,7 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
     }
 
     @Override
-    public void onServerError(String error) {
+    public void onError(String error) {
         errorSnackbar(error);
     }
 }
