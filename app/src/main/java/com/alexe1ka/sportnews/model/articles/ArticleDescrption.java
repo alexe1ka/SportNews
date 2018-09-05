@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-//TODO это не Articles.переименовать
-public class Articles {
+public class ArticleDescrption {
 
     @SerializedName("team1")
     @Expose

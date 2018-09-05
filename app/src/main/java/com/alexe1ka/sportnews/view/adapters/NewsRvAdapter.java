@@ -1,7 +1,9 @@
 package com.alexe1ka.sportnews.view.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.alexe1ka.sportnews.R;
 import com.alexe1ka.sportnews.model.events.Event;
 import com.alexe1ka.sportnews.model.events.Events;
+import com.alexe1ka.sportnews.view.activities.EventDescriptionActivity;
 
 public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder> {
     private static final String TAG = NewsRvAdapter.class.getSimpleName();
@@ -59,12 +62,13 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
     }
 
     //todo заимплементить сюда онклик когда будет все готово с первым экраном
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder  {
         TextView mTitleTv;
         TextView mCoefficientTv;
         TextView mTimeTv;
         TextView mPlaceTv;
         TextView mPreviewTv;
+        CardView mCardView;
 
 
         ViewHolder(View itemView) {
@@ -74,6 +78,16 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
             mTimeTv = itemView.findViewById(R.id.time_tv);
             mPlaceTv = itemView.findViewById(R.id.place_tv);
             mPreviewTv = itemView.findViewById(R.id.preview_tv);
+            mCardView = itemView.findViewById(R.id.event_card_view);
+            mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, EventDescriptionActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
+
+
     }
 }

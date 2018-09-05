@@ -1,6 +1,5 @@
 package com.alexe1ka.sportnews.view.fragments;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +46,7 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mProgressBar = getActivity().findViewById(R.id.loading_pb);
-//        mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
 
         mNewsListViewModel = ViewModelProviders.of(this).get(NewsListViewModel.class);
         mNewsListViewModel.init("football");
@@ -56,17 +54,17 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
             mNewsRvAdapter.setEvents(events);
         });
 
-        mNewsListViewModel.getShowProgress().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                Log.d(TAG, "onChanged: aBoolean: "+aBoolean);
-                if (!aBoolean) {
-                    showProgress();
-                } else {
-                    hideProgress();
-                }
-            }
-        });
+//        mNewsListViewModel.getShowProgress().observe(this, new Observer<Boolean>() {
+//            @Override
+//            public void onChanged(@Nullable Boolean aBoolean) {
+//                Log.d(TAG, "onChanged: aBoolean: "+aBoolean);
+//                if (!aBoolean) {
+//                    showProgress();
+//                } else {
+//                    hideProgress();
+//                }
+//            }
+//        });
 
 
 

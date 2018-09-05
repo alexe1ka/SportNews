@@ -1,6 +1,6 @@
 package com.alexe1ka.sportnews.network;
 
-import com.alexe1ka.sportnews.model.articles.Articles;
+import com.alexe1ka.sportnews.model.articles.ArticleDescrption;
 import com.alexe1ka.sportnews.model.events.Events;
 
 import retrofit2.Call;
@@ -12,5 +12,5 @@ public interface SportNewsApi {
     Call<Events> getEvents(@Query("category") String category);
 
     @GET("post.php?")
-    Call<Articles> getArticles(@Query("article") String article);
+    Call<ArticleDescrption> getArticles(@Query("article") String article);
 }
