@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.alexe1ka.sportnews.SportNewsApp;
-import com.alexe1ka.sportnews.model.articles.ArticleDescrption;
+import com.alexe1ka.sportnews.model.articles.ArticleDescription;
 import com.alexe1ka.sportnews.model.events.Event;
 import com.alexe1ka.sportnews.model.events.Events;
 
@@ -56,18 +56,18 @@ public class NewsRepository {
         return eventsMutableLiveData;
     }
 
-    public MutableLiveData<ArticleDescrption> getArticle(String articleUrl) {
-        MutableLiveData<ArticleDescrption> articleDescriptionMutableLiveData = new MutableLiveData<>();
-        SportNewsApp.getSportNewsApi().getArticles(articleUrl).enqueue(new Callback<ArticleDescrption>() {
+    public MutableLiveData<ArticleDescription> getArticle(String articleUrl) {
+        MutableLiveData<ArticleDescription> articleDescriptionMutableLiveData = new MutableLiveData<>();
+        SportNewsApp.getSportNewsApi().getArticles(articleUrl).enqueue(new Callback<ArticleDescription>() {
             @Override
-            public void onResponse(Call<ArticleDescrption> call, Response<ArticleDescrption> response) {
+            public void onResponse(Call<ArticleDescription> call, Response<ArticleDescription> response) {
                 if (response.isSuccessful()) {
                     articleDescriptionMutableLiveData.postValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<ArticleDescrption> call, Throwable t) {
+            public void onFailure(Call<ArticleDescription> call, Throwable t) {
 
             }
         });

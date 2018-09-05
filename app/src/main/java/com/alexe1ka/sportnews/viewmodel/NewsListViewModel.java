@@ -24,10 +24,6 @@ public class NewsListViewModel extends AndroidViewModel {
         mNewsRepository = SportNewsApp.getNewsRepository();
     }
 
-    public MutableLiveData<Boolean> getShowProgress() {
-        Log.d(TAG, "getShowProgress: ");
-        return showProgress;
-    }
 
     public MutableLiveData<Events> getEventsLiveData() {
         Log.d(TAG, "getEventsLiveData: ");

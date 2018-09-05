@@ -15,6 +15,7 @@ import com.alexe1ka.sportnews.R;
 import com.alexe1ka.sportnews.model.events.Event;
 import com.alexe1ka.sportnews.model.events.Events;
 import com.alexe1ka.sportnews.view.activities.EventDescriptionActivity;
+import com.alexe1ka.sportnews.view.fragments.EventDescriptionFragment;
 
 public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder> {
     private static final String TAG = NewsRvAdapter.class.getSimpleName();
@@ -31,7 +32,7 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
 
     public void setEvents(Events events) {
         Log.d(TAG, "setEvents: Adapter set events");
-        if (events!=mEvents){
+        if (events != mEvents) {
             mEvents = events;
             notifyDataSetChanged();
         }
@@ -48,11 +49,12 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Event event = mEvents.getEvents().get(position);
-        holder.mTitleTv.setText(event.getTitle());
-        holder.mCoefficientTv.setText(event.getCoefficient());
-        holder.mTimeTv.setText(event.getTime());
-        holder.mPlaceTv.setText(event.getPlace());
-        holder.mPreviewTv.setText(event.getPreview());
+        holder.bind(event);
+//        holder.mTitleTv.setText(event.getTitle());
+//        holder.mCoefficientTv.setText(event.getCoefficient());
+//        holder.mTimeTv.setText(event.getTime());
+//        holder.mPlaceTv.setText(event.getPlace());
+//        holder.mPreviewTv.setText(event.getPreview());
     }
 
 
@@ -62,13 +64,14 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
     }
 
     //todo заимплементить сюда онклик когда будет все готово с первым экраном
-    class ViewHolder extends RecyclerView.ViewHolder  {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTitleTv;
         TextView mCoefficientTv;
         TextView mTimeTv;
         TextView mPlaceTv;
         TextView mPreviewTv;
         CardView mCardView;
+        String url;
 
 
         ViewHolder(View itemView) {
@@ -79,15 +82,20 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
             mPlaceTv = itemView.findViewById(R.id.place_tv);
             mPreviewTv = itemView.findViewById(R.id.preview_tv);
             mCardView = itemView.findViewById(R.id.event_card_view);
-            mCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mContext, EventDescriptionActivity.class);
-                    mContext.startActivity(intent);
-                }
+            mCardView.setOnClickListener(view -> {
+                Intent intent = new Intent(mContext, EventDescriptionActivity.class);
+                intent.putExtra(EventDescriptionFragment.URL_EXTRA, url);
+                mContext.startActivity(intent);
             });
         }
 
-
+        public void bind(Event event) {
+            mTitleTv.setText(event.getTitle());
+            mCoefficientTv.setText(event.getCoefficient());
+            mTimeTv.setText(event.getTime());
+            mPlaceTv.setText(event.getPlace());
+            mPreviewTv.setText(event.getPreview());
+            url = event.getArticle();
+        }
     }
 }

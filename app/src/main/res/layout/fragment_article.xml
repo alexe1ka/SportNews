@@ -92,6 +92,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/art_head_of_event_tv"
-        android:text="ARTICLE_FRAGMENT"
         />
 </android.support.constraint.ConstraintLayout>
