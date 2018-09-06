@@ -85,7 +85,16 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
 
         public void bind(Event event) {
             mTitleTv.setText(event.getTitle());
-            mCoefficientTv.setText(event.getCoefficient());
+
+            //c сервера приходит "1.18 коэффициент" - трансформируем в "коэффициент =1.18"
+            String[] coeffSplit = event.getCoefficient().split(" ");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(coeffSplit[1]);
+            stringBuilder.append(" = ");
+            stringBuilder.append(coeffSplit[0]);
+
+
+            mCoefficientTv.setText(stringBuilder.toString());
             mTimeTv.setText(event.getTime());
             mPlaceTv.setText(event.getPlace());
             mPreviewTv.setText(event.getPreview());

@@ -13,20 +13,20 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-
+<!--если team1 и team2 команды в будущем - -->
         <View
             android:id="@+id/divider"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@android:color/darker_gray"
-            android:backgroundTint="@color/colorDivider"
-            android:visibility="gone"
+            android:background="@color/colorDivider"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/art_prediction_tv"/>
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2"/>
 
         <ProgressBar
             android:id="@+id/article_pb"
@@ -101,20 +101,32 @@
             app:layout_constraintTop_toBottomOf="@+id/art_time_tv"
             tools:text="art_tournament_tv"/>
 
-
-        <TextView
-            android:id="@+id/art_prediction_tv"
+        <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:gravity="center_horizontal"
+            android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/art_time_tv"
-            tools:text="art_prediction_tv"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/art_time_tv">
+
+            <TextView
+                android:id="@+id/art_prediction_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="127dp"
+                tools:layout_editor_absoluteY="123dp"
+                tools:text="art_prediction_tv"/>
+
+        </ScrollView>
+
 
     </android.support.constraint.ConstraintLayout>
 

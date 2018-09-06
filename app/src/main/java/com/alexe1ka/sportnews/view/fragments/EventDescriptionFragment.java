@@ -46,7 +46,7 @@ public class EventDescriptionFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //в ответе с апи на самом деле не названия команда,а слова СТАТИСТИКА и ГИД
+        //TODO в ответе с апи на самом деле не названия команда,а слова СТАТИСТИКА и ГИД
         mTeam1Tv = getActivity().findViewById(R.id.art_team1_tv);
         mTeam2Tv = getActivity().findViewById(R.id.art_team2_tv);
         mTimeTv = getActivity().findViewById(R.id.art_time_tv);
@@ -70,16 +70,32 @@ public class EventDescriptionFragment extends Fragment {
         mNewsDescriptionViewModel.getArticleDescriptionMutableLiveData().observe(this, new Observer<ArticleDescription>() {
             @Override
             public void onChanged(@Nullable ArticleDescription articleDescription) {
-                mTeam1Tv.setText(articleDescription.getTeam1());
-                mTeam2Tv.setText(articleDescription.getTeam2());
-                mTimeTv.setText(articleDescription.getTime());
-                mTournamentTv.setText(articleDescription.getTournament());
-                mPredictionTv.setText(articleDescription.getPrediction());
-                mArticleRvAdapter.setArticleList(articleDescription.getArticle());
+                if (articleDescription.getTeam1() != null || !articleDescription.getTeam1().equals("")) {//проверка на пустые строки.в каком то из ответом такие были
+                    mTeam1Tv.setText(articleDescription.getTeam1());
+                }
+                if (articleDescription.getTeam2() != null || !articleDescription.getTeam2().equals("")) {
+                    mTeam2Tv.setText(articleDescription.getTeam2());
+                }
+                if (articleDescription.getTime() != null || !articleDescription.getTime().equals("")) {
+                    mTimeTv.setText(articleDescription.getTime());
+                }
+                if (articleDescription.getTournament() != null || !articleDescription.getTournament().equals("")) {
+                    mTournamentTv.setText(articleDescription.getTournament());
+                }
+                if (articleDescription.getPrediction() != null || !articleDescription.getPrediction().equals("")) {
+                    mPredictionTv.setText(articleDescription.getPrediction());
+                }
+                if (articleDescription.getArticle() != null) {
+                    for (int i = 0; i < articleDescription.getArticle().size(); i++) {
+                        if (articleDescription.getArticle().get(i).getHeader().equals("") || articleDescription.getArticle().get(i).getText().equals("")) {
+                            articleDescription.getArticle().remove(i);
+                        }
+                    }
+                    mArticleRvAdapter.setArticleList(articleDescription.getArticle());
+                }
+
                 mProgressBar.setVisibility(View.GONE);
                 mDivider.setVisibility(View.VISIBLE);
-
-
             }
         });
     }
