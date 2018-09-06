@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SportNews</string>
+    <string name="app_name">Sport News</string>
 
     <string name="football_title">Football</string>
     <string name="hockey_title">Hockey</string>
@@ -8,6 +8,6 @@
     <string name="volleyball_title">Volleyball</string>
     <string name="cybersport_title">Cybersport</string>
 
-
+    <string name="nav_header_subtitle">android.studio@android.com</string>
 
 </resources>
