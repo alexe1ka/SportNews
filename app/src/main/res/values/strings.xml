@@ -12,7 +12,13 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="football"
+    <string name="football">football</string>
+    <string name="hockey">hockey</string>
+    <string name="tennis">tennis</string>
+    <string name="basketball">basketball</string>
+    <string name="volleyball">volleyball</string>
+    <string name="cybersport">cybersport</string>
+
 
 
 </resources>

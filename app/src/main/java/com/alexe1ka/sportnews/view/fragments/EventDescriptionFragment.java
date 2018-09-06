@@ -59,8 +59,6 @@ public class EventDescriptionFragment extends Fragment {
         mArticleRvAdapter = new ArticleRvAdapter(this.getContext());
         mArticleRv.setLayoutManager(mLayoutManager);
         mArticleRv.setAdapter(mArticleRvAdapter);
-//        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_article);
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         mProgressBar = getActivity().findViewById(R.id.article_pb);
         mProgressBar.setVisibility(View.VISIBLE);

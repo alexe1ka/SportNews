@@ -96,22 +96,22 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         switch (item.getItemId()) {
             case R.id.nav_football:
                 //TODO захардкоженные стринги
-                getNewsForThisSport("football");
+                getNewsForThisSport(getString(R.string.football));
                 break;
             case R.id.nav_hockey:
-                getNewsForThisSport("hockey");
+                getNewsForThisSport(getString(R.string.hockey));
                 break;
             case R.id.nav_tennis:
-                getNewsForThisSport("tennis");
+                getNewsForThisSport(getString(R.string.tennis));
                 break;
             case R.id.nav_basketball:
-                getNewsForThisSport("basketball");
+                getNewsForThisSport(getString(R.string.basketball));
                 break;
             case R.id.nav_volleyball:
-                getNewsForThisSport("volleyball");
+                getNewsForThisSport(getString(R.string.volleyball));
                 break;
             case R.id.nav_cybersport:
-                getNewsForThisSport("cybersport");
+                getNewsForThisSport(getString(R.string.cybersport));
                 break;
             default:
                 throw new UnsupportedOperationException();
