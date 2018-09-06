@@ -58,7 +58,6 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
         return mEvents != null ? mEvents.getEvents().size() : 0;
     }
 
-    //todo заимплементить сюда онклик когда будет все готово с первым экраном
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTitleTv;
         TextView mCoefficientTv;

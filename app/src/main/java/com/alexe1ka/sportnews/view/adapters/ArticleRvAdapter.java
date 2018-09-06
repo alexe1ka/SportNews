@@ -36,7 +36,7 @@ public class ArticleRvAdapter extends RecyclerView.Adapter<ArticleRvAdapter.View
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mArticleList != null ? mArticleList.size() : 0;
     }
 
     public void setArticleList(List<Article> articleList) {
