@@ -108,7 +108,7 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
                 getNewsForThisSport("football");
                 break;
             case R.id.nav_hockey:
-                getNewsForThisSport("ho");
+                getNewsForThisSport("ho");//TODO
 //                getNewsForThisSport("hockey");
                 break;
             case R.id.nav_tennis:
