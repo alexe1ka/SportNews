@@ -50,11 +50,6 @@ public class NewsRvAdapter extends RecyclerView.Adapter<NewsRvAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Event event = mEvents.getEvents().get(position);
         holder.bind(event);
-//        holder.mTitleTv.setText(event.getTitle());
-//        holder.mCoefficientTv.setText(event.getCoefficient());
-//        holder.mTimeTv.setText(event.getTime());
-//        holder.mPlaceTv.setText(event.getPlace());
-//        holder.mPreviewTv.setText(event.getPreview());
     }
 
 

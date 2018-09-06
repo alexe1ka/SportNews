@@ -45,7 +45,6 @@ public class SportNewsApp extends Application {
     }
 
     private OkHttpClient provideOkHttpClient() {
-        //для обработки ошибок сервера
         OkHttpClient okhttpClient = new OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(new NetworkConnectionInterceptor() {

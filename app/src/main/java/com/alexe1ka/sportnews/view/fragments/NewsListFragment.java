@@ -81,15 +81,6 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
 
     }
 
-    private void showProgress() {
-        mNewsRv.setVisibility(View.GONE);
-        mProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgress() {
-        mProgressBar.setVisibility(View.GONE);
-        mNewsRv.setVisibility(View.VISIBLE);
-    }
 
     @Nullable
     @Override
@@ -108,8 +99,7 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
                 getNewsForThisSport("football");
                 break;
             case R.id.nav_hockey:
-                getNewsForThisSport("ho");//TODO
-//                getNewsForThisSport("hockey");
+                getNewsForThisSport("hockey");
                 break;
             case R.id.nav_tennis:
                 getNewsForThisSport("tennis");
@@ -147,6 +137,7 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
     }
 
     public void errorSnackbar(String text) {
+        mProgressBar.setVisibility(View.GONE);
         Snackbar snackbar = Snackbar.make(getView(), text, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
