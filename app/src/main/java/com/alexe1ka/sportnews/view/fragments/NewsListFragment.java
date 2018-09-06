@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,7 +27,7 @@ import com.alexe1ka.sportnews.network.InternetErrorListener;
 import com.alexe1ka.sportnews.view.adapters.NewsRvAdapter;
 import com.alexe1ka.sportnews.viewmodel.NewsListViewModel;
 
-public class NewsListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, InternetConnectionListener,InternetErrorListener {
+public class NewsListFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener, InternetConnectionListener, InternetErrorListener {
     private static final String TAG = NewsListFragment.class.getSimpleName();
 
     private NewsListViewModel mNewsListViewModel;
@@ -54,13 +55,16 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         ((SportNewsApp) getActivity().getApplication()).setInternetErrorListener(this);
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         mProgressBar = getActivity().findViewById(R.id.loading_pb);
-        mProgressBar.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
 
         mNewsListViewModel = ViewModelProviders.of(this).get(NewsListViewModel.class);
         mNewsListViewModel.init("football");
-        mNewsListViewModel.getEventsLiveData().observe(this, events -> mNewsRvAdapter.setEvents(events));
+        mNewsListViewModel.getEventsLiveData().observe(this, events -> {
+            mNewsRvAdapter.setEvents(events);
+            mProgressBar.setVisibility(View.GONE);
+        });
 
 
         mNewsRv = getActivity().findViewById(R.id.news_list_rv);
@@ -68,6 +72,12 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         mNewsRvAdapter = new NewsRvAdapter(this.getContext());
         mNewsRv.setLayoutManager(mLayoutManager);
         mNewsRv.setAdapter(mNewsRvAdapter);
+
+        DrawerLayout drawer = getActivity().findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
     }
 
@@ -90,6 +100,8 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mNewsRv.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
         switch (item.getItemId()) {
             case R.id.nav_football:
                 //TODO захардкоженные стринги
@@ -121,7 +133,11 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
     }
 
     private void getNewsForThisSport(String sport) {
-        mNewsListViewModel.loadOtherEvents(sport).observe(this, events -> mNewsRvAdapter.setEvents(events));
+        mNewsListViewModel.loadOtherEvents(sport).observe(this, events -> {
+            mNewsRvAdapter.setEvents(events);
+            mProgressBar.setVisibility(View.GONE);
+            mNewsRv.setVisibility(View.VISIBLE);
+        });
     }
 
     @Override
