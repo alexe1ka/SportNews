@@ -34,7 +34,7 @@ public class NewsRepository {
 
             @Override
             public void onFailure(Call<Events> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: callOnFailure" + t.getMessage());
             }
         });
         return eventsMutableLiveData;
@@ -45,7 +45,7 @@ public class NewsRepository {
         SportNewsApp.getSportNewsApi().getArticles(articleUrl).enqueue(new Callback<ArticleDescription>() {
             @Override
             public void onResponse(Call<ArticleDescription> call, Response<ArticleDescription> response) {
-                Log.d(TAG, "onResponse: call:"+call.isExecuted());
+                Log.d(TAG, "onResponse: call:" + call.isExecuted());
                 if (response.isSuccessful()) {
                     articleDescriptionMutableLiveData.postValue(response.body());
                 }

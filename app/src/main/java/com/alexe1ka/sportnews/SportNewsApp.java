@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.alexe1ka.sportnews.network.HandlingErrorInterceptor;
 import com.alexe1ka.sportnews.network.InternetConnectionListener;
@@ -16,6 +17,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -45,8 +47,12 @@ public class SportNewsApp extends Application {
     }
 
     private OkHttpClient provideOkHttpClient() {
+        Dispatcher dispatcher = new Dispatcher();
+        Log.d(TAG, "provideOkHttpClient: runningCallsCount"+dispatcher.runningCallsCount());
+
         OkHttpClient okhttpClient = new OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
+                .dispatcher(dispatcher)
                 .addInterceptor(new NetworkConnectionInterceptor() {
                     @Override
                     public boolean isInternetAvailable() {

@@ -25,8 +25,8 @@ public abstract class NetworkConnectionInterceptor implements Interceptor {
         }
         Response response = chain.proceed(request);
         Log.d(TAG, "intercept: response code: "+response.code());
-        Log.d(TAG, "intercept: response header: "+response.headers());
-        Log.d(TAG, "intercept: response body: "+response.body());
+//        Log.d(TAG, "intercept: response header: "+response.headers());
+//        Log.d(TAG, "intercept: response body: "+response.body());
 
         return chain.proceed(request);
     }

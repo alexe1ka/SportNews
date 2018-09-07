@@ -70,6 +70,7 @@ public class EventDescriptionFragment extends Fragment {
         mNewsDescriptionViewModel.getArticleDescriptionMutableLiveData().observe(this, new Observer<ArticleDescription>() {
             @Override
             public void onChanged(@Nullable ArticleDescription articleDescription) {
+                assert articleDescription != null;
                 if (articleDescription.getTeam1() != null || !articleDescription.getTeam1().equals("")) {//проверка на пустые строки.в каком то из ответом такие были
                     mTeam1Tv.setText(articleDescription.getTeam1());
                 }
