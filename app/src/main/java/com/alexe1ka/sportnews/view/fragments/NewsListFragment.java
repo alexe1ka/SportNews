@@ -95,7 +95,6 @@ public class NewsListFragment extends Fragment implements NavigationView.OnNavig
         mProgressBar.setVisibility(View.VISIBLE);
         switch (item.getItemId()) {
             case R.id.nav_football:
-                //TODO захардкоженные стринги
                 getNewsForThisSport(getString(R.string.football));
                 break;
             case R.id.nav_hockey:
